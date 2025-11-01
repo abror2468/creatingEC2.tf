@@ -15,7 +15,7 @@ provider "aws" {
 
 resource "aws_instance" "AbrorIsDaGoat" {
   ami = "ami-0bdd88bd06d16ba03"
-  isstance_type = "t3.micro"
+  instance_type = "t3.micro"
   tags = {
     name = "yay"
   }
