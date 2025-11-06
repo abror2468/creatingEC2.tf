@@ -28,6 +28,7 @@ resource "aws_instance" "AbrorIsDaGoat" {
   vpc_security_group_ids = [aws_security_group.allow_tls.id]
   ami = "ami-0bdd88bd06d16ba03"
   instance_type = "t3.micro"
+  associate_public_ip_address = true
   tags = {
     name = "yay"
   }
@@ -64,4 +65,35 @@ resource "aws_vpc_security_group_egress_rule" "allow_all_traffic_ipv4" {
   cidr_ipv4         = "0.0.0.0/0"
   ip_protocol       = "-1" # semantically equivalent to all ports
 }
+
+
+
+
+
+
+resource "aws_internet_gateway" "gw" {
+  vpc_id = aws_vpc.AMEN.id
+
+  tags = {
+    Name = "main"
+  }
+}
+
+
+resource "aws_route_table" "example" {
+  vpc_id = aws_vpc.AMEN.id
+
+  route {
+    cidr_block = "0.0.0.0/0"
+    gateway_id = aws_internet_gateway.gw.id
+  }
+}
+
+resource "aws_route_table_association" "a" {
+  subnet_id      = aws_subnet.GodssecondCreation.id
+  route_table_id = aws_route_table.example.id
+}
+
+
+
 
