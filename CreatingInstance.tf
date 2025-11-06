@@ -29,6 +29,7 @@ resource "aws_instance" "AbrorIsDaGoat" {
   ami = "ami-0bdd88bd06d16ba03"
   instance_type = "t3.micro"
   associate_public_ip_address = true
+  count = 10
   tags = {
     name = "yay"
   }
